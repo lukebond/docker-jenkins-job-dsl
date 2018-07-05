@@ -1,28 +1,61 @@
-## Description
+# workshop-jenkins
 
-Docker Container with Jenkins Job DSL examples. For more details see blog article:
+A containerised Jenkins that works out of the box with LTS version, default
+plugins, "hello world" Jenkinsfile pipeline and the ability to mount in your
+own repository with a Jenkinsfile.
 
-- https://blog.codecentric.de/en/2015/10/using-jenkins-job-dsl-for-job-lifecycle-management/
+Began life as a fork of [https://github.com/marcelbirkner/docker-jenkins-job-dsl].
 
-### Getting started using Image from Docker Hub
+## Usage
 
-```
-docker run --publish=8080:8080 mbirkner/docker-jenkins-job-dsl
-```
-
-### Run Docker Container using GitHub repository
+To launch with the default "hello world" pipeline:
 
 ```
-git clone git@github.com:marcelbirkner/docker-jenkins-job-dsl.git
-cd docker-jenkins-job-dsl
-docker build -t docker-jenkins-job-dsl .
-docker run -p=8080:8080 docker-jenkins-job-dsl
+$ make run
 ```
 
-Once Jenkins is up and running go to http://192.168.59.103:8080
+To use your own local Git repository that has a Jenkinsfile in the root:
 
-I am using MacOS and Boot2Docker. If you are running Linux or on Windows the IP will be different.
+```
+$ HOST_REPO_PATH=/absolute/path/to/repo make run
+```
 
-### Links
+To stop and remove a running container:
 
-- Job DSL API https://jenkinsci.github.io/job-dsl-plugin/
+```
+$ make stop
+```
+
+NOTE: any changes you make to Jenkins itself will not be persisted, as the
+Jenkins home directory is not mounted to the host (and is therefore not
+persisted).
+
+To run the container without even pulling down this repository:
+
+```
+$ docker container run -d --restart always \
+  --publish 8080:8080 --name workshop-jenkins \
+  controlplaneio/workshop-jenkins:latest
+```
+
+...to do the same but mount in a host repo, just add
+`-v /absolute/path/to/repo:/opt/repo` to the `docker` invocation.
+
+## Building
+
+You should just be able to pull it from the Docker Hub, but if you want to
+rebuild it then just run:
+
+```
+$ make build
+```
+
+## Cleaning
+
+To stop a running container and remove the image:
+
+```
+$ make clean
+```
+
+Copyright 2018 ControlPlane Limited.

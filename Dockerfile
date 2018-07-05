@@ -4,7 +4,17 @@ COPY plugins.txt /var/jenkins_home/plugins.txt
 RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt
 
 # Adding default Jenkins Jobs
-COPY jobs/2-job-dsl-seed-job.xml /usr/share/jenkins/ref/jobs/2-job-dsl-seed-job/config.xml
+COPY jobs/pipeline-job-1.xml /usr/share/jenkins/ref/jobs/pipeline-job-1/config.xml
+COPY jobs/pipeline-job-1 /opt/repo/
+USER root
+RUN cd /opt/repo && \
+  git init && \
+  git config user.email "info@control-plane.io" && \
+  git config user.name "cp-training" && \
+  git add Jenkinsfile && \
+  git commit -m "Initial commit" && \
+  chown -R jenkins .
+USER jenkins
 
 ############################################
 # Configure Jenkins
