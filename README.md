@@ -35,7 +35,7 @@ To run the container without even pulling down this repository:
 ```
 $ docker container run -d --restart always \
   --publish 8080:8080 --name workshop-jenkins \
-  controlplaneio/workshop-jenkins:latest
+  controlplane/workshop-jenkins:latest
 ```
 
 ...to do the same but mount in a host repo, just add
