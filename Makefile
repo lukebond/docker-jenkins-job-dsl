@@ -18,7 +18,12 @@ ifdef HOST_REPO_PATH
 	MOUNT_VOLUME_LINE=-v ${HOST_REPO_PATH}:/opt/repo
 endif
 
-.PHONY: all 
+MOUNT_DOCKER_LINE :=
+ifeq ($(MOUNTDOCKER), true)
+	MOUNT_DOCKER_LINE=-v /var/run/docker.sock:/var/run/docker.sock
+endif
+
+.PHONY: all
 .SILENT:
 
 all: help
@@ -47,6 +52,7 @@ define run-default
 	docker container run ${RUN_MODE} \
 		--restart always \
 		${MOUNT_VOLUME_LINE} \
+		${MOUNT_DOCKER_LINE} \
 		--publish 8080:8080 \
 		--name ${NAME} \
 		"${CONTAINER_NAME_LATEST}"
