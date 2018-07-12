@@ -1,0 +1,8 @@
+node {
+   stage('Build') {
+       echo 'Hello from the build stage of the pipeline!'
+   }
+   stage('Test') {
+       echo 'Hello from the test stage of the pipeline!'
+   }
+}
