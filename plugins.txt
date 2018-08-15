@@ -71,3 +71,4 @@ ldap:1.20
 email-ext:2.62
 job-dsl:1.70
 build-monitor-plugin:1.12+build.201805070054
+nested-view:1.14
