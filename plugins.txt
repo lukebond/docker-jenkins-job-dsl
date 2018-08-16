@@ -72,3 +72,5 @@ email-ext:2.62
 job-dsl:1.70
 build-monitor-plugin:1.12+build.201805070054
 nested-view:1.14
+delivery-pipeline-plugin:1.2.0
+dashboard-view:2.9.11
