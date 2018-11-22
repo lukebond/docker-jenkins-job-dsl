@@ -34,6 +34,7 @@ To run the container without even pulling down this repository:
 
 ```
 $ docker container run -d --restart always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
   --publish 8080:8080 --name workshop-jenkins \
   controlplane/workshop-jenkins:latest
 ```
