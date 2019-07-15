@@ -80,3 +80,6 @@ maven-plugin:latest
 javadoc:latest
 conditional-buildstep:latest
 run-condition:latest
+extra-columns:latest
+progress-bar-column-plugin:latest
+compress-buildlog:latest
